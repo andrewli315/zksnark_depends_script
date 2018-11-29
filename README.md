@@ -1,5 +1,12 @@
-libsnark compile guide
-###
+#libsnark compile guide
+
+## Installation
+* Ubuntu 16.04 LTS
+```
+sudo apt-get install build-essential cmake git libgmp3-dev libprocps4-dev python-markdown libboost-all-dev libssl-dev
+```
+
+
 ```
 $ mkdir depends
 $ git clone https://github.com/scipr-lab/libsnark
