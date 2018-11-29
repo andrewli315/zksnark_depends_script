@@ -22,4 +22,4 @@ fi
 
 make 
 make check
-
+sudo check install
