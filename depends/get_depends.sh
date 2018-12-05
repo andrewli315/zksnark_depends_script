@@ -22,4 +22,4 @@ fi
 
 make 
 make check
-sudo make install
+make install/local
