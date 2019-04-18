@@ -111,7 +111,6 @@ template<typename FieldT>
 r1cs_system<FieldT> generate_system_with_binary(const size_t num_constraints,
 												const size_t num_inputs)
 {
-
 }
 
 }

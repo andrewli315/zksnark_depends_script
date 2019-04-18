@@ -25,7 +25,8 @@ class Prover{
 		r1cs_gg_ppzksnark_proof<FieldT> get_proof();
 	private:
 		r1cs_gg_ppzksnark_keypair<FieldT> *keypair;
-        r1cs_gg_ppzksnark_verification_key<FieldT> vk;        
+        r1cs_gg_ppzksnark_verification_key<FieldT> vk;
+        r1cs_gg_ppzksnark_proving_key<FieldT> pk;
 		r1cs_gg_ppzksnark_proof<FieldT> proof;
 		r1cs_system<libff::Fr<FieldT>> system;
 		r1cs_gg_ppzksnark_processed_verification_key<FieldT> pvk;
