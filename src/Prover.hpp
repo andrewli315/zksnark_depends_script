@@ -21,10 +21,11 @@ class Prover{
 			get_pvk();
 		// for verifier verification
 		r1cs_gg_ppzksnark_verification_key<FieldT> get_vk();
-		r1cs_primary_input<FieldT> get_primary_input();
+		r1cs_gg_ppzksnark_primary_input<FieldT> get_primary_input();
 		r1cs_gg_ppzksnark_proof<FieldT> get_proof();
 	private:
-		r1cs_gg_ppzksnark_keypair<FieldT> keypair;
+		r1cs_gg_ppzksnark_keypair<FieldT> *keypair;
+        r1cs_gg_ppzksnark_verification_key<FieldT> vk;        
 		r1cs_gg_ppzksnark_proof<FieldT> proof;
 		r1cs_system<libff::Fr<FieldT>> system;
 		r1cs_gg_ppzksnark_processed_verification_key<FieldT> pvk;
