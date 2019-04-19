@@ -36,7 +36,7 @@ template<typename FieldT>
 bool Verifier<FieldT>::verify()
 {
     libff::print_header("R1CS GG-ppzkSNARK Online Verifier");
-    cout << "test" << endl;
+    cout << this->primary_input << endl;
 	const bool ret = r1cs_gg_ppzksnark_verifier_weak_IC<FieldT>( this->vk, this->primary_input, this->proof);
 	return ret ? true:false;
 }
