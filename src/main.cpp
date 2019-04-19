@@ -13,12 +13,15 @@ int main(void)
     printf("This is a zksnark test\n");
 	default_r1cs_gg_ppzksnark_pp::init_public_params();
 	Prover<default_r1cs_gg_ppzksnark_pp> *prover = new Prover<default_r1cs_gg_ppzksnark_pp>(1000,100);
-    
+
     r1cs_gg_ppzksnark_verification_key<default_r1cs_gg_ppzksnark_pp> vk = prover->get_vk();
     r1cs_gg_ppzksnark_primary_input<default_r1cs_gg_ppzksnark_pp> primary_input = prover->get_primary_input();
     r1cs_gg_ppzksnark_proof<default_r1cs_gg_ppzksnark_pp>proof = prover->get_proof();
     r1cs_gg_ppzksnark_processed_verification_key<default_r1cs_gg_ppzksnark_pp> pvk = prover->get_pvk();     
+    
+    
     Verifier<default_r1cs_gg_ppzksnark_pp> verifier(vk, primary_input, proof);
+    verifier.set_pvk(pvk);
     
     /* 
     Verifier<default_r1cs_gg_ppzksnark_pp> verifier;
@@ -29,12 +32,18 @@ int main(void)
 
     //bool ret = true;      
     //const bool ret = r1cs_gg_ppzksnark_verifier_strong_IC<default_r1cs_gg_ppzksnark_pp>(vk, primary_input, proof);
-    const bool ret = verifier.verify()
-    //const bool ret = r1cs_gg_ppzksnark__verifier_strong_IC<default_r1cs_gg_ppzksnark_pp>(vk, primary_input, proof);
-    if( ret == true)   
+    const bool ret = verifier.online_verify();
+    //const bool ret = r1cs_gg_ppzksnark_online_verifier_strong_IC<default_r1cs_gg_ppzksnark_pp>(pvk, primary_input, proof);
+
+
+    if( ret == true )
+    {   
         cout << "Verify Success" << endl;
+    }
     else
+    {
         cout << "Verify Fail" << endl;
+    }
     return 0;
 }
 

@@ -31,13 +31,22 @@ void Verifier<FieldT>::set_proof(r1cs_gg_ppzksnark_proof<FieldT> proof)
 {
 	this->proof = std::move(proof);
 }
-
+template<typename FieldT>
+void Verifier<FieldT>::set_pvk(r1cs_gg_ppzksnark_processed_verification_key<FieldT> pvk)
+{
+    this->pvk = std::move(pvk);
+}
 template<typename FieldT>
 bool Verifier<FieldT>::verify()
 {
-    libff::print_header("R1CS GG-ppzkSNARK Online Verifier");
-    cout << this->primary_input << endl;
+    libff::print_header("R1CS GG-ppzkSNARK Verifier");
 	const bool ret = r1cs_gg_ppzksnark_verifier_weak_IC<FieldT>( this->vk, this->primary_input, this->proof);
-	return ret ? true:false;
+	return ret;
 }
-
+template<typename FieldT>
+bool Verifier<FieldT>::online_verify()
+{
+    libff::print_header("R1CS GG-PPZKSNARK ONLINE VERIFIER");
+    const bool ret = r1cs_gg_ppzksnark_online_verifier_strong_IC<FieldT>(this->pvk,this->primary_input, this->proof);
+    return ret;
+}

@@ -16,8 +16,11 @@ class Verifier{
 		void set_vk(r1cs_gg_ppzksnark_verification_key<FieldT> vk);
 		void set_primary_input(r1cs_gg_ppzksnark_primary_input<FieldT> primary_input);
 		void set_proof(r1cs_gg_ppzksnark_proof<FieldT> proof);
+        void set_pvk(r1cs_gg_ppzksnark_processed_verification_key<FieldT> pvk);
 		bool verify();
+        bool online_verify();
 	private:
+        r1cs_gg_ppzksnark_processed_verification_key<FieldT> pvk;
 		r1cs_gg_ppzksnark_verification_key<FieldT> vk;
 		r1cs_gg_ppzksnark_primary_input<FieldT> primary_input;
 		r1cs_gg_ppzksnark_proof<FieldT> proof;

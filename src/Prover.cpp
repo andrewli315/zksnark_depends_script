@@ -44,10 +44,10 @@ void Prover<FieldT>::generate_keypair()
 	r1cs_gg_ppzksnark_keypair<FieldT> kp = r1cs_gg_ppzksnark_generator<FieldT>( this->system.constraint_system );
 	
     r1cs_gg_ppzksnark_proof<FieldT> proof = r1cs_gg_ppzksnark_prover<FieldT>(kp.pk,this->system.primary_input, this->system.auxiliary_input);
+    r1cs_gg_ppzksnark_processed_verification_key<FieldT> processed_vk = r1cs_gg_ppzksnark_verifier_process_vk(kp.vk);
     this->vk = std::move(kp.vk);
     this->pk = std::move(kp.pk);
-    this->pvk = std::move(r1cs_gg_ppzksnark_verifier_process_vk(kp.vk));
-    //this->proof = std::move(proof);
+    this->pvk = std::move(processed_vk);
     this->keypair = &kp;
 }
 template<typename FieldT>
@@ -82,4 +82,3 @@ r1cs_gg_ppzksnark_proof<FieldT> Prover<FieldT>::get_proof()
 {
 	return this->proof;
 }
-
