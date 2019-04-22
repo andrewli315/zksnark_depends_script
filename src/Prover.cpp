@@ -41,9 +41,7 @@ Prover<FieldT>::Prover(const size_t constraint_size, const size_t field_size)
 template<typename FieldT>
 void Prover<FieldT>::generate_keypair()
 {
-	r1cs_gg_ppzksnark_keypair<FieldT> kp = r1cs_gg_ppzksnark_generator<FieldT>( this->system.constraint_system );
-	
-    r1cs_gg_ppzksnark_proof<FieldT> proof = r1cs_gg_ppzksnark_prover<FieldT>(kp.pk,this->system.primary_input, this->system.auxiliary_input);
+	r1cs_gg_ppzksnark_keypair<FieldT> kp = r1cs_gg_ppzksnark_generator<FieldT>( this->system.constraint_system );	
     r1cs_gg_ppzksnark_processed_verification_key<FieldT> processed_vk = r1cs_gg_ppzksnark_verifier_process_vk(kp.vk);
     this->vk = std::move(kp.vk);
     this->pk = std::move(kp.pk);
@@ -55,7 +53,6 @@ void Prover<FieldT>::generate_proof()
 {
     libff::print_header("R1CS GG-PPZKSNARK Prover");
 	r1cs_gg_ppzksnark_proof<FieldT> pf = r1cs_gg_ppzksnark_prover<FieldT>(this->pk, this->system.primary_input, this->system.auxiliary_input);
-    r1cs_gg_ppzksnark_verifier_strong_IC<FieldT>(this->vk, this->system.primary_input, pf);
     this->proof = std::move(pf);
     
 

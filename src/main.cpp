@@ -12,7 +12,7 @@ int main(void)
 {
     printf("This is a zksnark test\n");
 	default_r1cs_gg_ppzksnark_pp::init_public_params();
-	Prover<default_r1cs_gg_ppzksnark_pp> *prover = new Prover<default_r1cs_gg_ppzksnark_pp>(1000,100);
+	Prover<default_r1cs_gg_ppzksnark_pp> *prover = new Prover<default_r1cs_gg_ppzksnark_pp>(12,10);
 
     r1cs_gg_ppzksnark_verification_key<default_r1cs_gg_ppzksnark_pp> vk = prover->get_vk();
     r1cs_gg_ppzksnark_primary_input<default_r1cs_gg_ppzksnark_pp> primary_input = prover->get_primary_input();
